@@ -21,10 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Serch_Path_on_TwoLayersGraph.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TwoLayersGraph.h">
+    <ClInclude Include="Make_TwoLayersGraph.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,7 +32,10 @@
     <ClCompile Include="LELE_Path_Serch.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="TwoLayersGraph.cpp">
+    <ClCompile Include="Preprocessing_Graph.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Make_TwoLayersGraph.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
