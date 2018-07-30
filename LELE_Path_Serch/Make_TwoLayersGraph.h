@@ -1,6 +1,7 @@
 #pragma once
+#include <list>
 
-
+//頂点のBundle設定
 const struct Vertex
 {
 	int key; //頂点番号
@@ -9,22 +10,24 @@ const struct Vertex
 	struct Net *netnumber;	//ネット番号 0はネットではない 
 };
 
-const struct Net {
-	const int net_number; //ネット端子の個数
-	const int terminal_coordinate_x; //端子のx座標
-	const int terminal_coordinate_y; //端子のy座標
-	const int *next_terminal; //次の端子
-};
 
-
+//枝のBundle設定
 const struct Edge {
 	int weight; //辺の重み
 };
 
+//グラフのBundle設定
 const struct Graph_Layer {
 	string name;
 };
 
+//ネット
+typedef struct Net {
+	const int net_number; //ネット端子の個数
+	const int terminal_coordinate_x; //端子のx座標
+	const int terminal_coordinate_y; //端子のy座標
+	const int *next_terminal; //次の端子
+} Net;
 
 
 struct TwoLayersGraph
@@ -42,3 +45,10 @@ struct TwoLayersGraph
 	~TwoLayersGraph();
 };
 
+class Input_data {
+	struct Net *net_first_pointer; //ネットの頂点を指すの最初のポインタ
+public:
+	Input_data(int argc, char *argv[]);	//コンストラクト
+	~Input_data();	//デストラクタ
+
+};
