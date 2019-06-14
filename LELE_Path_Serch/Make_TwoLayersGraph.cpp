@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Make_TwoLayersGraph.h"
 #include <fstream>
 #include <string>
@@ -6,17 +6,20 @@
 using namespace std;
 using namespace boost;
 
+//TwoLayersgraph:é–¢æ•°å®£è¨€
 
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿:ï¼’å±¤ã‚°ãƒ©ãƒ•ã‚’ä½œæˆã™ã‚‹ã€€xè¡Œyåˆ—ã®ï¼’å±¤ã®ã‚°ãƒ©ãƒ•
 TwoLayersGraph::TwoLayersGraph(const int x,const int y,const int nets_number)
 {
-	Serch_Graph blue_graph;
-	blue_graph[graph_bundle].name = "blue";
+	Serch_Graph blue_graph;	//blue_graphã‚’ä½œæˆ
+	blue_graph[graph_bundle].name = "blue"; //blue_graphã®åå‰ã‚’blueã«ã™ã‚‹
 
-	Serch_Graph red_graph;
+	Serch_Graph red_graph; //ä¸Šã¨åŒã˜
 	red_graph[graph_bundle].name = "red";
 
-	for (int i = 0, const int vmax = x * y; i != vmax; i++) {
-		Serch_Graph::vertex_descriptor v = add_vertex(blue_graph);
+	//é ‚ç‚¹ã®è¿½åŠ 
+	for (int i = 0, const int vmax = x * y; i < vmax; i++) { //é ‚ç‚¹ç•ªå·ã¯å·¦ä¸ŠãŒ0 è¡Œã¨åˆ—ã‚‚0ã‹ã‚‰ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹
+		Serch_Graph::vertex_descriptor v = add_vertex(blue_graph); //é ‚ç‚¹ã‚’ï¼‘ã¤è¿½åŠ 
 		blue_graph[v].key = i;
 		blue_graph[v].x = i % x;
 		blue_graph[v].y = i / x;
@@ -27,44 +30,48 @@ TwoLayersGraph::TwoLayersGraph(const int x,const int y,const int nets_number)
 		red_graph[v2].y = i / x;
 	}
 
+	//è¾ºã®è¿½åŠ 
+	for (int i = 0, const int vmax = x * y; i < vmax; i++) {
+		add_edge(blue_graph)
+	}
 }
 
-
+//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿:2å±¤ã‚°ãƒ©ãƒ•ã‚’å‰Šé™¤ã™ã‚‹
 TwoLayersGraph::~TwoLayersGraph()
 {
 }
 
-//Input_dataƒNƒ‰ƒX‚ÌŠÖ”’è‹`
+//Input_dataã‚¯ãƒ©ã‚¹:é–¢æ•°å®šç¾©
 Input_data::Input_data(int argc, char *argv[]) {
 	if (argc != 3) {
 		cout << "Error: This program needs .in file and .dat file." << endl;
 		return;
 	}
 
-	//“ü—Íƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
-	//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚ª.in‚È‚Ì‚©.dat‚È‚Ì‚©’²‚×‚é
+	//å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€
+	//ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°ãŒ.inãªã®ã‹.datãªã®ã‹èª¿ã¹ã‚‹
 	string str = "";
 	str = argv[1];
-	if ((int)str.find(".in") != -1) { //‘æiˆø”‚ª.inƒtƒ@ƒCƒ‹‚¾‚Á‚½ê‡
+	if ((int)str.find(".in") != -1) { //ç¬¬iå¼•æ•°ãŒ.inãƒ•ã‚¡ã‚¤ãƒ«ã ã£ãŸå ´åˆ
 
-		//ƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg‚ğ¶¬
-		ifstream ifs(argv[1]); //ifstream : ƒtƒ@ƒCƒ‹‚É‘Î‚·‚é“ü—ÍƒXƒgƒŠ[ƒ€
+		//ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
+		ifstream ifs(argv[1]); //ifstream : ãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã™ã‚‹å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ 
 		if (!ifs) {
 			cout << "Error: File can not be opend" << endl;
 			return;
 		}
 		
-		//.inƒtƒ@ƒCƒ‹‚ÌEOF‚Ü‚Å‚Ps‚¸‚Â“Ç‚İ‚ñ‚ÅŠeƒlƒbƒg‚ÌÀ•W‚ğ‹L˜^
-		for (int l,m,s	; getline(ifs, str) ;) {
+		//.inãƒ•ã‚¡ã‚¤ãƒ«ã®EOFã¾ã§ï¼‘è¡Œãšã¤èª­ã¿è¾¼ã‚“ã§å„ãƒãƒƒãƒˆã®åº§æ¨™ã‚’è¨˜éŒ²
+		while(getline(ifs, str)) {
 			
 		}
-
 		ifs.close();
-
 	}
+
 	else if((int)str.find(".dat") != -1) {
 
 	}
+
 	else {
 		cout << "Error: This program needs .in file and .dat file." << endl;
 		return;

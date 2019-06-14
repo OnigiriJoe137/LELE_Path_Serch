@@ -1,54 +1,53 @@
-#pragma once
+ï»¿#pragma once
 #include <list>
 
-//’¸“_‚ÌBundleİ’è
-const struct Vertex
+//Boostã®è¨­å®š
+//é ‚ç‚¹ã®Bundleè¨­å®š
+typedef struct Vertex
 {
-	int key; //’¸“_”Ô†
-	int x;	//xÀ•W
-	int y;	//yÀ•W
-	struct Net *netnumber;	//ƒlƒbƒg”Ô† 0‚Íƒlƒbƒg‚Å‚Í‚È‚¢ 
-};
+	int key; //é ‚ç‚¹ç•ªå·
+	int x;	//xåº§æ¨™
+	int y;	//yåº§æ¨™
+	struct Net *netnumber;	//ãƒãƒƒãƒˆç•ªå· 0ã¯ãƒãƒƒãƒˆã§ã¯ãªã„ 
+} Vertex;
 
+//æã®Bundleè¨­å®š
+typedef struct Edge {
+	int weight; //è¾ºã®é‡ã¿
+} Edge;
 
-//}‚ÌBundleİ’è
-const struct Edge {
-	int weight; //•Ó‚Ìd‚İ
-};
-
-//ƒOƒ‰ƒt‚ÌBundleİ’è
-const struct Graph_Layer {
+//ã‚°ãƒ©ãƒ•ã®Bundleè¨­å®š
+struct Graph_Layer {
 	string name;
 };
 
-//ƒlƒbƒg
+//ãƒãƒƒãƒˆã®æƒ…å ±ï¼šå€‹æ•°ã¨ã‹ä½ç½®åº§æ¨™ã¨ã‹
 typedef struct Net {
-	const int net_number; //ƒlƒbƒg’[q‚ÌŒÂ”
-	const int terminal_coordinate_x; //’[q‚ÌxÀ•W
-	const int terminal_coordinate_y; //’[q‚ÌyÀ•W
-	const int *next_terminal; //Ÿ‚Ì’[q
+	const int net_number; //ãƒãƒƒãƒˆç«¯å­ã®å€‹æ•°
+	const int terminal_coordinate_x; //ç«¯å­ã®xåº§æ¨™
+	const int terminal_coordinate_y; //ç«¯å­ã®yåº§æ¨™
+	const int *next_terminal; //æ¬¡ã®ç«¯å­
 } Net;
 
+typedef boost::adjacency_list <
+	boost::vecS,	//é ‚ç‚¹ã¯vector 
+	boost::listS,	//è¾ºã¯ãƒ™ã‚¯ã‚¿ãƒ¼
+	boost::undirectedS,		//ç„¡å‘æ
+	Vertex,		//VertexPropertiesã€€é ‚ç‚¹ã®å‹ã€€//ä»»æ„ã‚¯ã‚¹ã‚’ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã«ã™ã‚‹
+	Edge,	//EdgeProperties ,é‡ã¿
+	Graph_Layer	//GraphProperties
+> Serch_Graph;
 
-struct TwoLayersGraph
-{
-	typedef boost::adjacency_list <
-		boost::listS,	//’¸“_‚ÍƒŠƒXƒg 
-		boost::vecS,	//•Ó‚ÍƒxƒNƒ^[
-		boost::undirectedS,		//–³Œü}
-		Vertex,		//’¸“_‚ÌBundleƒvƒƒpƒeƒB
-		Edge,	//•Ó‚ÌBundleƒvƒƒpƒeƒB
-		Graph_Layer	//ƒOƒ‰ƒt‚ÌBundleƒvƒƒpƒeƒB
-	> Serch_Graph;	
-
-	TwoLayersGraph(const int x,const int y,const int nets_number);	//ŠiqƒOƒ‰ƒt‚Ìs‚Æ—ñAƒlƒbƒg”
+struct TwoLayersGraph {	
+	TwoLayersGraph(const int,const int,const int); //ï¼’å±¤ã‚°ãƒ©ãƒ•ã‚’ä½œæˆã™ã‚‹
 	~TwoLayersGraph();
 };
 
 class Input_data {
-	struct Net *net_first_pointer; //ƒlƒbƒg‚Ì’¸“_‚ğw‚·‚ÌÅ‰‚Ìƒ|ƒCƒ“ƒ^
+	Net *net_first_pointer; //ãƒãƒƒãƒˆã®é ‚ç‚¹ã‚’æŒ‡ã™æœ€åˆã®ãƒã‚¤ãƒ³ã‚¿
 public:
-	Input_data(int argc, char *argv[]);	//ƒRƒ“ƒXƒgƒ‰ƒNƒg
-	~Input_data();	//ƒfƒXƒgƒ‰ƒNƒ^
-
+	Input_data(int argc, char *argv[]);	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	~Input_data();	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 };
+
+
