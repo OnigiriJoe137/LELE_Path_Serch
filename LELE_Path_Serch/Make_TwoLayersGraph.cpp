@@ -8,32 +8,29 @@ using namespace boost;
 
 //TwoLayersgraph:関数宣言
 
-//コンストラクタ:２層グラフを作成する　x行y列の２層のグラフ
-TwoLayersGraph::TwoLayersGraph(const int x,const int y,const int nets_number)
+//コンストラクタ:２層グラフを作成する　
+//x行y列の２層のグラフ グラフのは０行０列から始まることに注意
+TwoLayersGraph::TwoLayersGraph(const int x, const int y, const int nets_number)
 {
-	Serch_Graph blue_graph;	//blue_graphを作成
-	blue_graph[graph_bundle].name = "blue"; //blue_graphの名前をblueにする
-
-	Serch_Graph red_graph; //上と同じ
-	red_graph[graph_bundle].name = "red";
+	Serch_Graph blue;
+	blue[graph_bundle].name = "blue";
+	Serch_Graph red;
+	red[graph_bundle].name = "red";
 
 	//頂点の追加
+	std::map<int, Serch_Graph::vertex_descriptor> desc;
 	for (int i = 0, const int vmax = x * y; i < vmax; i++) { //頂点番号は左上が0 行と列も0からカウントする
-		Serch_Graph::vertex_descriptor v = add_vertex(blue_graph); //頂点を１つ追加
-		blue_graph[v].key = i;
-		blue_graph[v].x = i % x;
-		blue_graph[v].y = i / x;
+		desc[i] = add_vertex(blue); //頂点を１つ追加
+		blue[desc[i]].key = i;	//頂点番号
+		blue[desc[i]].x = i % x;	//x座標
+		blue[desc[i]].y = i / x;	//y座標
 
-		Serch_Graph::vertex_descriptor v2 = add_vertex(red_graph);
-		red_graph[v2].key = i;
-		red_graph[v2].x = i % x;
-		red_graph[v2].y = i / x;
+		Serch_Graph::vertex_descriptor v2 = add_vertex(red);
+		red[v2].key = i;
+		red[v2].x = i % x;
+		red[v2].y = i / x;
 	}
 
-	//辺の追加
-	for (int i = 0, const int vmax = x * y; i < vmax; i++) {
-		add_edge(blue_graph)
-	}
 }
 
 //デストラクタ:2層グラフを削除する
@@ -67,7 +64,6 @@ Input_data::Input_data(int argc, char *argv[]) {
 		}
 		ifs.close();
 	}
-
 	else if((int)str.find(".dat") != -1) {
 
 	}

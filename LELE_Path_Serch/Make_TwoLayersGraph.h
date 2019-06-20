@@ -8,7 +8,7 @@ typedef struct Vertex
 	int key; //頂点番号
 	int x;	//x座標
 	int y;	//y座標
-	struct Net *netnumber;	//ネット番号 0はネットではない 
+	struct Net *net;	//ネット番号 0はネットではない
 } Vertex;
 
 //枝のBundle設定
@@ -23,7 +23,8 @@ struct Graph_Layer {
 
 //ネットの情報：個数とか位置座標とか
 typedef struct Net {
-	const int net_number; //ネット端子の個数
+	const int net_number;
+	const int net_count; //ネット端子の個数
 	const int terminal_coordinate_x; //端子のx座標
 	const int terminal_coordinate_y; //端子のy座標
 	const int *next_terminal; //次の端子
@@ -38,7 +39,7 @@ typedef boost::adjacency_list <
 	Graph_Layer	//GraphProperties
 > Serch_Graph;
 
-struct TwoLayersGraph {	
+class TwoLayersGraph {	
 	TwoLayersGraph(const int,const int,const int); //２層グラフを作成する
 	~TwoLayersGraph();
 };
